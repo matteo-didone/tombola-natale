@@ -19,19 +19,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Configure CORS headers for all responses
-        response()->macro('cors', function ($response) {
-            $origin = request()->header('Origin');
-            $allowedOrigins = config('cors.allowed_origins', []);
-
-            if (in_array($origin, $allowedOrigins)) {
-                $response->headers->set('Access-Control-Allow-Origin', $origin);
-                $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-                $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-                $response->headers->set('Access-Control-Max-Age', '86400');
-            }
-
-            return $response;
-        });
+        // Ensure the default view paths are correctly set
+        \Illuminate\Support\Facades\View::addLocation(resource_path('views'));
     }
 }

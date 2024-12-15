@@ -27,17 +27,20 @@ COPY composer.* ./
 # Install dependencies
 RUN composer install --no-scripts --no-autoloader
 
+# Create necessary directories and set permissions
+RUN mkdir -p /var/www/html/bootstrap/cache /var/www/html/storage \
+    && chown -R www-data:www-data /var/www/html/bootstrap/cache /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache /var/www/html/storage
+
 # Copy the rest of the application
 COPY . .
 
 # Generate optimized autoloader
 RUN composer dump-autoload --optimize
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage \
-    && chmod -R 775 /var/www/html/storage \
-    && chown -R www-data:www-data /var/www/html/bootstrap/cache \
-    && chmod -R 775 /var/www/html/bootstrap/cache
+# Final permissions setup
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html
 
 EXPOSE 8000
 
