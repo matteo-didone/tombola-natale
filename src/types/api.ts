@@ -1,16 +1,7 @@
-import type { Player, Card } from './game';
-
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-}
-
-export interface ExtractNumberResponse {
-  number: number;
-}
-
-export interface CheckWinResponse {
-  isWinner: boolean;
+interface ApiCard {
+  riga1: number[];
+  riga2: number[];
+  riga3: number[];
 }
 
 export interface JoinGameResponse {
@@ -18,5 +9,5 @@ export interface JoinGameResponse {
 }
 
 export interface CreateCardResponse {
-  card: Card;
+  card: ApiCard;
 }

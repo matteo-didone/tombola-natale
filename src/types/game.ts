@@ -9,7 +9,7 @@ export interface Player {
   cards: Card[];
 }
 
-export type WinType = 'ambo' | 'terno' | 'quaterna' | 'cinquina' | 'tombola';
+export type WinType = "ambo" | "terno" | "quaterna" | "cinquina" | "tombola";
 
 export interface GameState {
   extractedNumbers: Set<number>;

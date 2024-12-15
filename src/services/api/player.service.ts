@@ -1,7 +1,14 @@
-import { api } from './base';
-import { API_ENDPOINTS } from './endpoints';
-import type { JoinGameResponse, CreateCardResponse } from '@/types/api';
-import type { Player, Card } from '@/types/game';
+import { api } from "./base";
+import { API_ENDPOINTS } from "./endpoints";
+import type { JoinGameResponse, CreateCardResponse } from "@/types/api";
+import type { Player, Card } from "@/types/game";
+
+const transformApiCardToCard = (apiCard: ApiCard): Card => {
+  return {
+    id: crypto.randomUUID(), // or however you're generating IDs
+    rows: [apiCard.riga1, apiCard.riga2, apiCard.riga3],
+  };
+};
 
 export const playerService = {
   joinGame: async (name: string): Promise<Player> => {
@@ -17,6 +24,6 @@ export const playerService = {
       API_ENDPOINTS.PLAYER.CREATE_CARD,
       { playerId }
     );
-    return data.card;
-  }
+    return transformApiCardToCard(data.card);
+  },
 };
