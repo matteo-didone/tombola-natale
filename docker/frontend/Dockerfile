@@ -2,11 +2,13 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Copia i file package.json e package-lock.json
 COPY package*.json ./
-RUN npm install
 
+# Rimuovi node_modules e installa le dipendenze
+RUN rm -rf node_modules && npm install
+
+# Copia il resto dei file
 COPY . .
-
-EXPOSE 5173
 
 CMD ["npm", "run", "dev"]
