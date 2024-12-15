@@ -10,12 +10,12 @@ use Illuminate\Http\JsonResponse;
 class GameController extends Controller
 {
     private $gameService;
-    
+
     public function __construct(GameService $gameService)
     {
         $this->gameService = $gameService;
     }
-    
+
     public function extract(): JsonResponse
     {
         try {
@@ -25,7 +25,17 @@ class GameController extends Controller
             return response()->json(['message' => $e->getMessage()], 500);
         }
     }
-    
+
+    public function createCard(): JsonResponse
+    {
+        try {
+            $card = $this->gameService->createCard();
+            return response()->json(['card' => $card]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
     public function checkWin(CheckWinRequest $request): JsonResponse
     {
         try {
@@ -33,7 +43,6 @@ class GameController extends Controller
                 $request->playerId,
                 $request->winType
             );
-            
             return response()->json(['isWinner' => $isWinner]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
+            $table->enum('status', ['active', 'completed'])->default('active');
             $table->integer('current_number')->nullable();
             $table->json('extracted_numbers')->nullable();
             $table->timestamps();
