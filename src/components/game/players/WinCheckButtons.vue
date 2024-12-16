@@ -4,7 +4,7 @@ import type { WinType } from '@/types/game';
 import { WIN_TYPES } from '@/config/constants';
 
 const props = defineProps<{
-  playerId: string;
+  playerId: string | number;
 }>();
 
 const gameStore = useGameStore();
