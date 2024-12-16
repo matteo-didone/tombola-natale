@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { GameState } from '@/types/game';
+import type { GameState, WinType } from '@/types/game';
 import { gameService } from '@/services';
 
 const initialState: GameState = {
@@ -45,9 +45,16 @@ export const useGameStore = defineStore('game', () => {
     state.value = { ...initialState };
   };
 
+  const checkWin = async (playerId: string | number, winType: WinType) => {
+    // Implementation of win checking logic
+    console.log(`Checking ${winType} win for player ${playerId}`);
+    // Add your win checking logic here
+  };
+
   return {
     state,
     extract,
-    reset
+    reset,
+    checkWin
   };
 });

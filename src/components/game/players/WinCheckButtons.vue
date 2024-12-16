@@ -8,10 +8,9 @@ const props = defineProps<{
 }>();
 
 const gameStore = useGameStore();
-const { checkWin } = gameStore;
 
 const handleWinCheck = async (winType: WinType) => {
-  await checkWin(props.playerId, winType);
+  await gameStore.checkWin(props.playerId, winType);
 };
 </script>
 
